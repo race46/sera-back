@@ -22,8 +22,8 @@ func Signup(c *fiber.Ctx) error {
 		c.Cookie(&fiber.Cookie{
 			Name:     "session_token",
 			Value:    jwt,
-			HTTPOnly: true,
-			Secure:   true,
+			HTTPOnly: false,
+			Secure:   false,
 		})
 
 		return c.JSON(user)
