@@ -12,9 +12,13 @@ func SetUpRoutes(app *fiber.App) {
 	app.Post("/api/upload", gdive.UploadFile)
 	app.Post("/api/signup", controller.Signup)
 	app.Post("/api/login", controller.Login)
+	app.Get("/api/logout", controller.LogOut)
 
 	//products
 	app.Get("/api/products", controller.GetProducts)
+
+	//sellers
+	app.Get("/api/sellers", controller.GetSellers)
 
 	app.Use(middleware.Authenticate)
 
@@ -25,5 +29,11 @@ func SetUpRoutes(app *fiber.App) {
 	app.Post("/api/product", controller.AddProduct)
 	app.Get("/api/my-products", controller.MyProducts)
 	app.Put("/api/activate-product/:id", controller.ActivateProduct)
+	app.Delete("/api/product/:id", controller.DeleteProduct)
+
+	//Basket
+	app.Post("/api/basket/:id", controller.AddBasket)
+	app.Delete("/api/basket/:id", controller.RemoveBasket)
+	app.Get("/api/my-basket", controller.MyBasket)
 
 }

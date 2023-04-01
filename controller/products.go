@@ -51,3 +51,24 @@ func ActivateProduct(c *fiber.Ctx) error {
 
 	return c.SendString("ok")
 }
+
+func DeleteProduct(c *fiber.Ctx) error {
+	user := c.Locals("user").(string)
+	product := new(models.Product)
+	id, _ := strconv.Atoi(c.Params("id"))
+
+	result := database.Connection.First(product, "id=?", id)
+
+	if result.Error != nil || product.Username != user {
+		return c.Status(400).SendString("error")
+	}
+
+	result = database.Connection.Delete(product)
+
+	if result.Error != nil {
+		return c.Status(400).SendString("error")
+	}
+
+	return c.SendString("ok")
+
+}

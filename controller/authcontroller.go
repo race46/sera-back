@@ -7,6 +7,7 @@ import (
 	"sera-back/database"
 	"sera-back/models"
 	"sera-back/utils"
+	"time"
 )
 
 func Signup(c *fiber.Ctx) error {
@@ -61,8 +62,18 @@ func Login(c *fiber.Ctx) error {
 func Me(c *fiber.Ctx) error {
 	user := new(models.User)
 	username := c.Locals("user").(string)
-	println(username + " username xdxd")
 	database.Connection.First(user, "username=?", username)
-
 	return c.JSON(user)
+}
+
+func LogOut(c *fiber.Ctx) error {
+	c.Cookie(&fiber.Cookie{
+		Name:     "session_token",
+		Value:    "",
+		HTTPOnly: false,
+		Secure:   false,
+		Expires:  time.Now(),
+	})
+
+	return c.SendString("ok")
 }
