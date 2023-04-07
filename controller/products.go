@@ -15,6 +15,7 @@ func AddProduct(c *fiber.Ctx) error {
 	}
 	user := c.Locals("user").(string)
 	product.Username = user
+	product.UserId = user
 	result := database.Connection.Create(product)
 
 	if result.Error == nil {

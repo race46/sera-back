@@ -9,4 +9,6 @@ type Product struct {
 	CreatedAt int64  `json:"createdAt"`
 	UpdatedAt int64  `json:"updatedAt"`
 	Location  string `json:"location"`
+	UserId    string
+	User      User
 }

@@ -8,6 +8,6 @@ import (
 
 func GetSellers(c *fiber.Ctx) error {
 	var sellers []models.Product
-	database.Connection.Find(&sellers)
+	database.Connection.Preload("User.File").Find(&sellers)
 	return c.JSON(sellers)
 }
