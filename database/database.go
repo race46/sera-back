@@ -15,6 +15,6 @@ func Connect() {
 	if err != nil {
 		println("could not connected to db")
 	}
-	db.AutoMigrate(&models.User{}, &models.Product{}, &models.Basket{})
+	db.AutoMigrate(&models.User{}, &models.Product{}, &models.Basket{}, &models.File{})
 	Connection = db
 }

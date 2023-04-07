@@ -1,5 +1,7 @@
 package models
 
+import "database/sql"
+
 type User struct {
 	Username  string `gorm:"uniqueIndex;not null; primaryKey" json:"username"`
 	Email     string `gorm:"uniqueIndex;not null" json:"email"`
@@ -8,4 +10,6 @@ type User struct {
 	Surname   string `json:"surname"`
 	CreatedAt int64  `json:"createdAt"`
 	UpdatedAt int64  `json:"updatedAt"`
+	FileId    sql.NullString
+	File      *File
 }

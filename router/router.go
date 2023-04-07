@@ -25,6 +25,9 @@ func SetUpRoutes(app *fiber.App) {
 	//Authentication
 	app.Get("/api/me", controller.Me)
 
+	//User
+	app.Post("/api/update-pp", gdive.UploadFile, controller.UpdatePP)
+
 	//Products
 	app.Post("/api/product", controller.AddProduct)
 	app.Get("/api/my-products", controller.MyProducts)

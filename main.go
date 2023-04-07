@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"log"
 	"sera-back/database"
 	"sera-back/router"
 )
@@ -12,8 +13,9 @@ func main() {
 
 	app := fiber.New()
 	app.Use(cors.New())
+	app.Static("/files", "./files")
 
 	router.SetUpRoutes(app)
 
-	println(app.Listen(":8080"))
+	log.Fatalln(app.Listen(":8080"))
 }

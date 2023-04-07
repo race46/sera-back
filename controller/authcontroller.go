@@ -61,8 +61,10 @@ func Login(c *fiber.Ctx) error {
 
 func Me(c *fiber.Ctx) error {
 	user := new(models.User)
+	//file := new(models.File)
 	username := c.Locals("user").(string)
-	database.Connection.First(user, "username=?", username)
+	database.Connection.Preload("File").First(user, "username=?", username)
+
 	return c.JSON(user)
 }
 
